@@ -1,15 +1,24 @@
+import prismadb from "@/lib/prismadb";
 
-const DashboardPage = () => {
+interface DashboardPageProps {
+  params: { storeId : string };
+}
+
+const DashboardPage: React.FC<DashboardPageProps> = async ({
+  params
+}) => {
+
+  const store = await prismadb.store.findFirst({
+    where: {
+      id: params.storeId
+    }
+  })
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="space-y-4">
-        <h1 className="text-3xl font-bold text-center">
-          Welcome to your dashboard!
-        </h1>
-        <p className="text-center">
-          This is a starter template for your dashboard.
-        </p>
-      </div>
+    <div>
+      Active Store: {store?.name}
     </div>
   );
 }
+
+export default DashboardPage;
