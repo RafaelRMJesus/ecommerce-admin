@@ -3,6 +3,9 @@ import { auth } from "@clerk/nextjs";
 
 import prismadb from "@/lib/prismadb";
 
+
+
+
 export async function GET(
   req: Request,
   { params }: { params: { categoryId: string } }
@@ -33,7 +36,7 @@ export async function DELETE(
   { params }: { params: { categoryId: string, storeId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const { userId} = auth();
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
